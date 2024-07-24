@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controlmat - Asignación de Roles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-3" style="width: 100%; max-width: 700px;">
+            <h5 class="mb-3 text-center">Asignación de Roles</h5>
+            <form id="roleAssignmentForm" onsubmit="return validateUserAndAssignRole()">
+                <div class="mb-2 position-relative">
+                    <label for="identificacion" class="form-label">Identificación</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                        <input type="text" id="identificacion" name="identificacion" class="form-control"
+                            placeholder="Identificación" required>
+                    </div>
+                </div>
+                <div id="role-selection" style="display: none;">
+                    <div class="mb-2 position-relative">
+                        <label for="rol" class="form-label">Seleccione un rol</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <select id="rol" name="rol" class="form-control" required>
+                                <option value="" disabled selected>Seleccione un rol</option>
+                                <option value="operario-empaque">Operario de empaque</option>
+                                <option value="administrador">Administrador</option>
+                                <option value="auxiliar-conciliacion">Auxiliar de conciliación</option>
+                                <option value="auxiliar-documentacion">Auxiliar de documentación</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Asignar Rol</button>
+                </div>
+                <button type="button" class="btn btn-primary w-100 mt-2" onclick="checkUserActivation()">Validar</button>
+            </form>
+
+            <!-- Tabla de roles asignados -->
+            <div class="mt-4">
+                <h5>Roles Asignados</h5>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Número de Documento</th>
+                            <th>ID Usuario</th>
+                            <th>Rol</th>
+                            <th>Fecha de Asignación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rolesTableBody">
+                        <!-- Datos de prueba -->
+                        <tr>
+                            <td>1234567890</td>
+                            <td>1</td>
+                            <td>operario-empaque</td>
+                            <td>01/07/2023</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-outline-primary me-2"
+                                    onclick="editRole(1)">Cambiar Rol</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                    onclick="deleteRole(1)">Quitar Rol</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>9876543210</td>
+                            <td>2</td>
+                            <td>administrador</td>
+                            <td>02/07/2023</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-outline-primary me-2"
+                                    onclick="editRole(2)">Cambiar Rol</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                    onclick="deleteRole(2)">Quitar Rol</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5678901234</td>
+                            <td>3</td>
+                            <td>auxiliar-conciliacion</td>
+                            <td>03/07/2023</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-outline-primary me-2"
+                                    onclick="editRole(3)">Cambiar Rol</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                    onclick="deleteRole(3)">Quitar Rol</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var rolesData = [
+            { numeroDocumento: '1234567890', idUsuario: 1, rol: 'operario-empaque', fechaAsignacion: '01/07/2023' },
+            { numeroDocumento: '9876543210', idUsuario: 2, rol: 'administrador', fechaAsignacion: '02/07/2023' },
+            { numeroDocumento: '5678901234', idUsuario: 3, rol: 'auxiliar-conciliacion', fechaAsignacion: '03/07/2023' }
+        ]; // Datos de prueba de roles asignados
+
+        function checkUserActivation() {
+            var identificacion = document.getElementById('identificacion').value;
+
+            // Simular la verificación del estado de activación del usuario
+            var isActive = true; // Reemplazar con lógica real para verificar si el usuario está activo
+
+            if (isActive) {
+                document.getElementById('role-selection').style.display = 'block';
+                document.querySelector('button[onclick="checkUserActivation()"]').style.display = 'none'; // Ocultar botón Validar
+            } else {
+                alert('El usuario no está activo. No se puede asignar un rol.');
+            }
+        }
+
+        function validateUserAndAssignRole() {
+            var rol = document.getElementById('rol').value;
+
+            if (!rol) {
+                alert('Seleccione un rol válido.');
+                return false;
+            }
+
+            // Simular la asignación de roles y capturar la fecha actual
+            var fechaAsignacion = new Date().toLocaleDateString();
+
+            // Construir el objeto de datos del rol asignado
+            var roleData = {
+                numeroDocumento: '2468013579', // Número de documento quemado para demostración
+                idUsuario: rolesData.length + 1, // Generar un ID secuencial para demostración
+                rol: rol,
+                fechaAsignacion: fechaAsignacion
+            };
+
+            // Agregar el objeto a la lista de datos de roles
+            rolesData.push(roleData);
+
+            // Actualizar la tabla de roles asignados
+            updateRolesTable();
+
+            // Limpiar el formulario de selección de roles después de la asignación
+            document.getElementById('rol').value = '';
+
+            // Otras lógicas de validación y asignación de roles pueden añadirse aquí
+
+            return false; // Prevenir el envío del formulario
+        }
+
+        function updateRolesTable() {
+            var tableBody = document.getElementById('rolesTableBody');
+            tableBody.innerHTML = ''; // Limpiar contenido existente
+
+            // Recorrer la lista de datos de roles y agregar filas a la tabla
+            rolesData.forEach(function (role) {
+                var row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${role.numeroDocumento}</td>
+                    <td>${role.idUsuario}</td>
+                    <td>${role.rol}</td>
+                    <td>${role.fechaAsignacion}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline-primary me-2"
+                            onclick="editRole(${role.idUsuario})">Cambiar Rol</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger"
+                            onclick="deleteRole(${role.idUsuario})">Quitar Rol</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function editRole(idUsuario) {
+            // Implementar lógica de edición si es necesario
+            alert(`Editar ID de usuario ${idUsuario}`);
+        }
+
+        function deleteRole(idUsuario) {
+            // Implementar lógica de eliminación
+            rolesData = rolesData.filter(function (role) {
+                return role.idUsuario !== idUsuario;
+            });
+
+            updateRolesTable(); // Actualizar la tabla después de la eliminación
+        }
+
+        // Función para inicializar la tabla al cargar la página
+        window.onload = function () {
+            updateRolesTable();
+        };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

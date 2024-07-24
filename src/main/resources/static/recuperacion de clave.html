@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controlmat - Recuperación de Contraseña</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-3" style="width: 100%; max-width: 500px;">
+            <h5 class="mb-3 text-center">Recuperación de Contraseña</h5>
+            <div class="text-center mb-3">
+                <img src="logo.jpg" alt="Controlmat Logo" style="max-width: 300px;">
+            </div>
+            <form id="recoveryForm" onsubmit="return validateRecoveryForm()">
+                <div class="mb-2 position-relative">
+                    <label for="identificacion" class="form-label">Identificación</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                        <input type="text" id="identificacion" name="identificacion" class="form-control"
+                            placeholder="Identificación" required>
+                    </div>
+                </div>
+                <div class="mb-2 position-relative">
+                    <label for="security-question" class="form-label">Método de recuperación de contraseña</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-question-circle"></i></span>
+                        <select id="security-question" name="security-question" class="form-control" required>
+                            <option value="" disabled selected>Seleccione una pregunta</option>
+                            <option value="document-issue-date">Fecha de expedición del documento</option>
+                            <option value="pet-name">Nombre de una mascota</option>
+                            <option value="relative-name">Nombre de un familiar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-2 position-relative">
+                    <label for="security-answer" class="form-label">Respuesta</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-pencil"></i></span>
+                        <input type="text" id="security-answer" name="security-answer" class="form-control"
+                            placeholder="Respuesta" required>
+                    </div>
+                </div>
+                <div id="new-password-fields" style="display: none;">
+                    <div class="mb-2 position-relative">
+                        <label for="new-password" class="form-label">Nueva Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="password" id="new-password" name="new-password" class="form-control"
+                                placeholder="Nueva Contraseña" required>
+                        </div>
+                    </div>
+                    <div class="mb-2 position-relative">
+                        <label for="confirm-new-password" class="form-label">Confirmar Nueva Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="password" id="confirm-new-password" name="confirm-new-password"
+                                class="form-control" placeholder="Confirmar Nueva Contraseña" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                </div>
+                <button type="button" class="btn btn-primary w-100" onclick="validateAnswer()">Validar Respuesta</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function validateAnswer() {
+            // Simulate validation for demonstration purposes
+            var correctAnswer = true; // Assume the answer is correct
+
+            if (correctAnswer) {
+                document.getElementById('new-password-fields').style.display = 'block';
+            } else {
+                alert('Respuesta incorrecta. Intente de nuevo.');
+            }
+        }
+
+        function validateRecoveryForm() {
+            var newPassword = document.getElementById('new-password').value;
+            var confirmNewPassword = document.getElementById('confirm-new-password').value;
+
+            if (newPassword !== confirmNewPassword) {
+                alert('Las contraseñas no coinciden.');
+                return false;
+            }
+
+            // Additional form validation can be added here
+
+            return true;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
