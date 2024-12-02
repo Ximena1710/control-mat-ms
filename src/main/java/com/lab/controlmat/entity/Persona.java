@@ -1,6 +1,7 @@
 package com.lab.controlmat.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,9 +47,9 @@ public class Persona {
 	private String email;
 
 	@Column(name = "fecha_creacion")
-	private Timestamp fechaCreacion;
+	private LocalDateTime fechaCreacion;
 
 	@Column(name = "fecha_vinculacion")
-	private Timestamp fechaVinculacion;
+	private LocalDateTime fechaVinculacion;
 
 }

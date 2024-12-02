@@ -2,6 +2,7 @@ package com.lab.controlmat.dto;
 
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -39,8 +40,8 @@ public class PersonasDTO {
 	public String email;
 	
 	@JsonProperty("fecha_creacion")
-	public Timestamp fechaCreacion;
+	public LocalDateTime fechaCreacion;
 	
 	@JsonProperty("fecha_vinculacion")
-	public Timestamp fechaVinculacion;
+	public LocalDateTime fechaVinculacion;
 }

@@ -19,7 +19,7 @@ public class UsuarioController {
 	@Autowired
 	UsuarioService usuarioService;
 
-	@PostMapping(path = "login")
+	@PostMapping(path = "/login")
 	public int login(@RequestBody Credenciales credenciales) {
 		return usuarioService.findExistUsuario(credenciales);
 	}
