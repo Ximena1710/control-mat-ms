@@ -3,9 +3,9 @@ spring:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: postgres
-    password: root
+    url: jdbc:postgresql://dpg-ct6gh308fa8c73c9mi9g-a.oregon-postgres.render.com:5432/bd_controlmat?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: bd_controlmat_user
+    password: ysAV4I0gfcisOTBGHHMk25iaJfZuJ5cP
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
@@ -13,4 +13,3 @@ spring:
         ddl-auto: none
         show-sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        
