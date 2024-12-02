@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: postgres

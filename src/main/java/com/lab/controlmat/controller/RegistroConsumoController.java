@@ -15,36 +15,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.lab.controlmat.dto.MaterialInsumoDTO;
+import com.lab.controlmat.dto.RegistroConsumoDTO;
+import com.lab.controlmat.exception.NoExistException;
+import com.lab.controlmat.dto.RegistroConsumoDTO;
 import com.lab.controlmat.service.MaterialInsulmoService;
+import com.lab.controlmat.service.RegistroConsumoService;
 
-@RequestMapping("/v1/material")
+import org.springframework.validation.annotation.Validated;
+import jakarta.validation.Valid;
+
 @RestController
-public class MaterialInsumoController {
+@RequestMapping("/v1/consumo")
+@Validated
+public class RegistroConsumoController {
+	
 	@Autowired
-	MaterialInsulmoService materialInsulmoService;
+	RegistroConsumoService registroConsumoService;
 
 	@GetMapping("/find")
-	public List<MaterialInsumoDTO> consultarMaterial() {
-		return materialInsulmoService.findAll();
+	public List<RegistroConsumoDTO> consultarConsumo() {
+		return registroConsumoService.findAll();
 	}
 
 	@PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> saveMaterial(@RequestBody MaterialInsumoDTO materialInsumo)
-			throws JsonProcessingException {
-		return new ResponseEntity<>(materialInsulmoService.saveAndUpdate(materialInsumo), HttpStatus.OK);
+	public ResponseEntity<String> saveConsumo (@Valid @RequestBody RegistroConsumoDTO registroConsumoDTO)
+			throws JsonProcessingException, NoExistException {
+		return new ResponseEntity<>(registroConsumoService.saveAndUpdate(registroConsumoDTO), HttpStatus.OK);
 	}
 
 	@PutMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> updateMaterial(@RequestBody MaterialInsumoDTO materialInsumo)
-			throws JsonProcessingException {
-		materialInsulmoService.saveAndUpdate(materialInsumo);
+	public ResponseEntity<String> updateConsumo(@RequestBody RegistroConsumoDTO registroConsumoDTO)
+			throws JsonProcessingException, NoExistException {
+		registroConsumoService.saveAndUpdate(registroConsumoDTO);
 		return new ResponseEntity<>("Se actualizo correctamente", HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> deleteMaterial(@RequestBody MaterialInsumoDTO materialInsumoDTO)
+	public ResponseEntity<String> deleteConsumo(@RequestBody RegistroConsumoDTO registroConsumoDTO)
 			throws JsonProcessingException {
-		return new ResponseEntity<>(materialInsulmoService.delete(materialInsumoDTO), HttpStatus.OK);
+		return new ResponseEntity<>(registroConsumoService.delete(registroConsumoDTO), HttpStatus.OK);
 	}
 }

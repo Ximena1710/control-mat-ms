@@ -6,17 +6,19 @@ import java.util.Optional;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lab.controlmat.dto.Credenciales;
 import com.lab.controlmat.dto.MaterialInsumoDTO;
+import com.lab.controlmat.dto.RegistroConsumoDTO;
 import com.lab.controlmat.entity.MaterialInsumo;
 import com.lab.controlmat.entity.Persona;
 import com.lab.controlmat.exception.NoExistException;
 
-public interface MaterialInsulmoService {
+public interface RegistroConsumoService {
 
-	 List<MaterialInsumoDTO> findAll();
+	 List<RegistroConsumoDTO> findAll();
 	
-	 String saveAndUpdate(MaterialInsumoDTO materialInsumoDTO)  throws JsonProcessingException;
+	 String saveAndUpdate(RegistroConsumoDTO registroConsumoDTO)  throws JsonProcessingException, NoExistException;
 	
-	 String delete(MaterialInsumoDTO materialInsumoDTO)  throws JsonProcessingException;
+	 String delete(RegistroConsumoDTO registroConsumoDTO)  throws JsonProcessingException;
 
-	 void findById(int idMaterialInsumo) throws NoExistException;
+	 
+	
 }

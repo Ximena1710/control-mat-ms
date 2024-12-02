@@ -16,35 +16,37 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lab.controlmat.dto.MaterialInsumoDTO;
+import com.lab.controlmat.dto.ProductoDTO;
 import com.lab.controlmat.service.MaterialInsulmoService;
+import com.lab.controlmat.service.ProductoService;
 
-@RequestMapping("/v1/material")
 @RestController
-public class MaterialInsumoController {
+@RequestMapping("/v1/producto")
+public class ProductoController {
 	@Autowired
-	MaterialInsulmoService materialInsulmoService;
+	ProductoService productoService;
 
 	@GetMapping("/find")
-	public List<MaterialInsumoDTO> consultarMaterial() {
-		return materialInsulmoService.findAll();
+	public List<ProductoDTO> consultarMaterial() {
+		return productoService.findAll();
 	}
 
 	@PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> saveMaterial(@RequestBody MaterialInsumoDTO materialInsumo)
+	public ResponseEntity<String> saveMaterial(@RequestBody ProductoDTO productoDTO)
 			throws JsonProcessingException {
-		return new ResponseEntity<>(materialInsulmoService.saveAndUpdate(materialInsumo), HttpStatus.OK);
+		return new ResponseEntity<>(productoService.saveAndUpdate(productoDTO), HttpStatus.OK);
 	}
 
 	@PutMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> updateMaterial(@RequestBody MaterialInsumoDTO materialInsumo)
+	public ResponseEntity<String> updateMaterial(@RequestBody ProductoDTO productoDTO)
 			throws JsonProcessingException {
-		materialInsulmoService.saveAndUpdate(materialInsumo);
+		productoService.saveAndUpdate(productoDTO);
 		return new ResponseEntity<>("Se actualizo correctamente", HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> deleteMaterial(@RequestBody MaterialInsumoDTO materialInsumoDTO)
+	public ResponseEntity<String> deleteMaterial(@RequestBody ProductoDTO productoDTO)
 			throws JsonProcessingException {
-		return new ResponseEntity<>(materialInsulmoService.delete(materialInsumoDTO), HttpStatus.OK);
+		return new ResponseEntity<>(productoService.delete(productoDTO), HttpStatus.OK);
 	}
 }
