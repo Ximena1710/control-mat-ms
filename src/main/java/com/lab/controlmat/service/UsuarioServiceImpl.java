@@ -15,6 +15,8 @@ import com.lab.controlmat.exception.NoExistException;
 import com.lab.controlmat.repository.UsuarioRepository;
 import com.lab.controlmat.utils.Utils;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
@@ -23,6 +25,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 	 
 	@Autowired
 	private UsuarioRolService usuarioRolService;
+	
+	@Autowired
+	private RolService rolService;
 	
 	@Autowired
 	ModelMapper modelMapper;
@@ -35,20 +40,24 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 
 	@Override
+	@Transactional
 	public PersonasDTO addPersona(PersonasDTO personaDTO) throws JsonProcessingException {
 		Persona persona = Utils.convertEntityAndDto(personaDTO, Persona.class, modelMapper);
-		usuarioRolService.saveAndUpdate(getUsuarioRol(personaDTO));
 		usuarioRepository.save(persona);
+		
+	    UsuarioRolDTO usuarioRolDTO = getUsuarioRol(personaDTO.getClave(), persona);
+	    usuarioRolService.saveAndUpdate(usuarioRolDTO);
+
 		return personaDTO;
 	}
 
 
-	private UsuarioRolDTO getUsuarioRol(PersonasDTO persona) {
+	private UsuarioRolDTO getUsuarioRol(String clave, Persona persona) {
 		return UsuarioRolDTO
 				.builder()
-				.rol(new RolDTO())
+				.rol(rolService.findById())
 				.persona(persona)
-				.clave(persona.getClave())
+				.clave(clave)
 				.fechaCreacion(persona.getFechaCreacion())
 				.fechaModificacion(persona.getFechaCreacion())
 				.estado('A')

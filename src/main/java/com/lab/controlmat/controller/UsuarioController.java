@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lab.controlmat.dto.Credenciales;
 import com.lab.controlmat.dto.PersonasDTO;
 import com.lab.controlmat.service.UsuarioService;
@@ -25,7 +26,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping(path = "/registrar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PersonasDTO> registro(@RequestBody PersonasDTO personaDto) {
+	public ResponseEntity<PersonasDTO> registro(@RequestBody PersonasDTO personaDto) throws JsonProcessingException {
 		return new ResponseEntity<>(usuarioService.addPersona(personaDto), HttpStatus.OK);
 	}
 
