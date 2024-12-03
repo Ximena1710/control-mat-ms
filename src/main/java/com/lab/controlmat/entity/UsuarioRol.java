@@ -1,6 +1,7 @@
 package com.lab.controlmat.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,10 +33,10 @@ public class UsuarioRol {
     private String clave;
 
     @Column(name = "fecha_creacion")
-    private Timestamp fechaCreacion;
+    private LocalDateTime fechaCreacion;
 
     @Column(name = "fecha_modificacion")
-    private Timestamp fechaModificacion;
+    private LocalDateTime fechaModificacion;
 
     @Column(name = "estado")
     private char estado;
@@ -72,19 +73,19 @@ public class UsuarioRol {
 		this.clave = clave;
 	}
 
-	public Timestamp getFechaCreacion() {
+	public LocalDateTime getFechaCreacion() {
 		return fechaCreacion;
 	}
 
-	public void setFechaCreacion(Timestamp fechaCreacion) {
+	public void setFechaCreacion(LocalDateTime fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public Timestamp getFechaModificacion() {
+	public LocalDateTime getFechaModificacion() {
 		return fechaModificacion;
 	}
 
-	public void setFechaModificacion(Timestamp fechaModificacion) {
+	public void setFechaModificacion(LocalDateTime fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
 

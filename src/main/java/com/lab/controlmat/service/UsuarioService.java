@@ -1,5 +1,6 @@
 package com.lab.controlmat.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lab.controlmat.dto.Credenciales;
 import com.lab.controlmat.dto.PersonasDTO;
 import com.lab.controlmat.dto.ProductoDTO;
@@ -10,7 +11,7 @@ public interface UsuarioService {
 
 	public int findExistUsuario(Credenciales credenciales);
 	
-	public PersonasDTO addPersona(PersonasDTO personaDTO);
+	public PersonasDTO addPersona(PersonasDTO personaDTO) throws JsonProcessingException;
 
 	public void findById(int idPersona) throws NoExistException;;
 

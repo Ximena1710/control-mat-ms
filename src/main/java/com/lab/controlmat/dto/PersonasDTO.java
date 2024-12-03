@@ -44,4 +44,7 @@ public class PersonasDTO {
 	
 	@JsonProperty("fecha_vinculacion")
 	public LocalDateTime fechaVinculacion;
+	
+	@JsonProperty("clave")
+	public String clave;
 }
