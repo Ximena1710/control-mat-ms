@@ -41,7 +41,7 @@ public class Persona {
 	private String numeroDocumento;
 
 	@Column(name = "telefono")
-	private int telefono;
+	private String telefono;
 
 	@Column(name = "email")
 	private String email;

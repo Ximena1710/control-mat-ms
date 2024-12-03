@@ -34,7 +34,7 @@ public class PersonasDTO {
 	public String numeroDocumento;
 	
 	@JsonProperty("telefono")
-	public int telefono;
+	public String telefono;
 	
 	@JsonProperty("email")
 	public String email;
