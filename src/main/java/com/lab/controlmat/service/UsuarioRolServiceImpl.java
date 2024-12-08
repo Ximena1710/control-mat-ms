@@ -63,9 +63,9 @@ public class UsuarioRolServiceImpl implements UsuarioRolService{
 	}
 
 	@Override
-	public void findById(int idUsuarioRolDTO) throws NoExistException {
-		usuarioRolRepository.findById(idUsuarioRolDTO).orElseThrow(
-					() -> new NoExistException("El id_producto no fue encontrado, por favor cree primero un producto")
+	public UsuarioRol findById(int idUsuarioRolDTO) throws NoExistException {
+		return usuarioRolRepository.findById(idUsuarioRolDTO).orElseThrow(
+					() -> new NoExistException("El id_usuario_Rol no fue encontrado, por favor cree primero un producto")
 				);
 	}
 

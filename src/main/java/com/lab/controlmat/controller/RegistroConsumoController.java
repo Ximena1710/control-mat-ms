@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lab.controlmat.dto.RegistroConsumoDTO;
+import com.lab.controlmat.entity.RegistroConsumo;
 import com.lab.controlmat.exception.NoExistException;
 import com.lab.controlmat.dto.RegistroConsumoDTO;
 import com.lab.controlmat.service.MaterialInsulmoService;
@@ -33,10 +34,11 @@ public class RegistroConsumoController {
 	RegistroConsumoService registroConsumoService;
 
 	@GetMapping("/find")
-	public List<RegistroConsumoDTO> consultarConsumo() {
-		return registroConsumoService.findAll();
+	public ResponseEntity<List<RegistroConsumo>> consultarConsumo() {
+	    List<RegistroConsumo> consumos = registroConsumoService.findAll();
+	    return ResponseEntity.ok(consumos);
 	}
-
+	 
 	@PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> saveConsumo (@Valid @RequestBody RegistroConsumoDTO registroConsumoDTO)
 			throws JsonProcessingException, NoExistException {
@@ -52,7 +54,7 @@ public class RegistroConsumoController {
 
 	@DeleteMapping("/delete")
 	public ResponseEntity<String> deleteConsumo(@RequestBody RegistroConsumoDTO registroConsumoDTO)
-			throws JsonProcessingException {
+			throws JsonProcessingException, NoExistException {
 		return new ResponseEntity<>(registroConsumoService.delete(registroConsumoDTO), HttpStatus.OK);
 	}
 }

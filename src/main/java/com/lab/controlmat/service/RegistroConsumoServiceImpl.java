@@ -15,7 +15,10 @@ import com.lab.controlmat.dto.MaterialInsumoDTO;
 import com.lab.controlmat.dto.PersonasDTO;
 import com.lab.controlmat.dto.ProductoDTO;
 import com.lab.controlmat.dto.RegistroConsumoDTO;
+import com.lab.controlmat.entity.MaterialInsumo;
+import com.lab.controlmat.entity.Producto;
 import com.lab.controlmat.entity.RegistroConsumo;
+import com.lab.controlmat.entity.UsuarioRol;
 import com.lab.controlmat.exception.NoExistException;
 import com.lab.controlmat.repository.RegistroConsumoRepository;
 import com.lab.controlmat.utils.Utils;
@@ -34,33 +37,46 @@ public class RegistroConsumoServiceImpl implements RegistroConsumoService{
     private final ModelMapper modelMapper;
     private final MaterialInsulmoService materialInsulmoService;
     private final ProductoService productoService;
-    private final UsuarioService usuarioService;
+    private final UsuarioRolService usuarioRolService;
     ObjectMapper mapper;
     
 	@Override
 	@Transactional(readOnly = true)
-	public List<RegistroConsumoDTO> findAll() {
-		List<RegistroConsumo> listRgistroConsumo = (List<RegistroConsumo>) registroConsumoRepository.findAll();
-		return listRgistroConsumo.stream()
-		        .map(registro -> Utils.convertEntityAndDto(registro, RegistroConsumoDTO.class, modelMapper))
-		        .collect(Collectors.toList());
+	public List<RegistroConsumo> findAll() {
+		return (List<RegistroConsumo>) registroConsumoRepository.findAll();
 	}
-
 	@Override
 	@Transactional
 	public String saveAndUpdate(RegistroConsumoDTO registroConsumoDTO) throws JsonProcessingException, NoExistException {
-		materialInsulmoService.findById(registroConsumoDTO.getIdMaterialInsumo());
-	    productoService.findById(registroConsumoDTO.getIdProducto());
-		RegistroConsumo registroConsumo =  Utils.convertEntityAndDto(registroConsumoDTO, RegistroConsumo.class, modelMapper);
-		registroConsumoRepository.save(registroConsumo);
-		return mapper.writeValueAsString("Se inserto y/o actualizo correctamente");
+	    registroConsumoRepository.save(getRegistroConsumo(registroConsumoDTO));
+	    
+	    return mapper.writeValueAsString("Se insertó y/o actualizó correctamente");
 	}
 
 	@Override
 	@Transactional
-	public String delete(RegistroConsumoDTO registroConsumoDTO) throws JsonProcessingException {
-		RegistroConsumo registroConsumo = Utils.convertEntityAndDto(registroConsumoDTO, RegistroConsumo.class, modelMapper);
-		registroConsumoRepository.delete(registroConsumo);
-		return mapper.writeValueAsString("Se elimino correctamente");
+	public String delete(RegistroConsumoDTO registroConsumoDTO) throws JsonProcessingException, NoExistException {
+	    RegistroConsumo registroConsumo = registroConsumoRepository.findById(registroConsumoDTO.getIdRegistro())
+	        .orElseThrow(() -> new NoExistException("El registro con el ID proporcionado no existe"));
+	    registroConsumoRepository.delete(registroConsumo);
+	    return mapper.writeValueAsString("Se eliminó correctamente");
+	}
+
+	
+	public RegistroConsumo getRegistroConsumo(RegistroConsumoDTO registroConsumoDTO) throws JsonProcessingException, NoExistException {
+	    UsuarioRol usuario = usuarioRolService.findById(registroConsumoDTO.getIdUsuario());
+		Producto producto = productoService.findById(registroConsumoDTO.getIdProducto());
+	    MaterialInsumo materialInsumo = materialInsulmoService.findById(registroConsumoDTO.getIdMaterialInsumo());
+
+	    
+	    RegistroConsumo registroConsumo = new RegistroConsumo();
+	    registroConsumo.setMaterialInsumo(materialInsumo);
+	    registroConsumo.setProducto(producto);
+	    registroConsumo.setUsuario(usuario);
+	    registroConsumo.setCantidadUsada(registroConsumoDTO.getCantidadUsada());
+	    registroConsumo.setAdiciones(registroConsumoDTO.getAdiciones());
+	    registroConsumo.setDevoluciones(registroConsumoDTO.getDevoluciones());
+	    registroConsumo.setMaterialesRechazadosDesperdicio(registroConsumoDTO.getMaterialesRechazadosDesperdicio());
+	    return registroConsumo;
 	}
 }

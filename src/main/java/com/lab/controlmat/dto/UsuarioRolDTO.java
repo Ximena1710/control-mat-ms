@@ -1,6 +1,5 @@
 package com.lab.controlmat.dto;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -14,10 +13,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UsuarioRolDTO {
-
+	
+	@JsonProperty("id_usuario")
+	private int idUsuario;
+	
     private Rol rol;
 
     private Persona persona;

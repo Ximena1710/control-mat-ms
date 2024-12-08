@@ -62,9 +62,10 @@ public class ProductoServiceImpl implements ProductoService{
 	}
 	
 	@Override
-	public void findById(int idProducto) throws NoExistException {
-		 productoRepository.findById(idProducto).orElseThrow(
-				() -> new NoExistException("El id_producto no fue encontrado, por favor cree primero un producto")
-			);
+	public Producto findById(int idProducto) throws NoExistException {
+	    System.out.println("Buscando producto con id: " + idProducto); // Log para verificar el valor de idProducto
+		 return productoRepository.findById(idProducto).orElseThrow(
+					() -> new NoExistException("El id_material_insumo no fue encontrado, por favor cree primero un material")
+				);
 	}
 }

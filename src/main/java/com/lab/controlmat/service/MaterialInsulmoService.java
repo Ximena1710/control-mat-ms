@@ -18,5 +18,5 @@ public interface MaterialInsulmoService {
 	
 	 String delete(MaterialInsumoDTO materialInsumoDTO)  throws JsonProcessingException;
 
-	 void findById(int idMaterialInsumo) throws NoExistException;
+	 MaterialInsumo findById(int idMaterialInsumo) throws NoExistException;
 }

@@ -61,8 +61,8 @@ public class MaterialInsumoServiceImpl implements MaterialInsulmoService{
 	}
 
 	@Override
-	public void findById(int idMaterialInsumo) throws NoExistException {
-		MaterialInsumo materialInsumo = materialInsumoRepository.findById(idMaterialInsumo).orElseThrow(
+	public MaterialInsumo findById(int idMaterialInsumo) throws NoExistException {
+		return materialInsumoRepository.findById(idMaterialInsumo).orElseThrow(
 					() -> new NoExistException("El id_material_insumo no fue encontrado, por favor cree primero un material")
 				);
 	}

@@ -53,15 +53,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 
 	private UsuarioRolDTO getUsuarioRol(String clave, Persona persona) {
-		return UsuarioRolDTO
-				.builder()
-				.rol(rolService.findById())
-				.persona(persona)
-				.clave(clave)
-				.fechaCreacion(persona.getFechaCreacion())
-				.fechaModificacion(persona.getFechaCreacion())
-				.estado('A')
-				.build();
+		UsuarioRolDTO usuarioRol =  new UsuarioRolDTO();
+		usuarioRol.setRol(rolService.findById());
+		usuarioRol.setPersona(persona);
+		usuarioRol.setClave(clave);
+		usuarioRol.setFechaCreacion(persona.getFechaCreacion());
+		usuarioRol.setFechaModificacion(persona.getFechaCreacion());
+		usuarioRol.setEstado('A');
+		return usuarioRol;
 	}
 
 

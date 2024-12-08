@@ -9,16 +9,15 @@ import com.lab.controlmat.dto.MaterialInsumoDTO;
 import com.lab.controlmat.dto.RegistroConsumoDTO;
 import com.lab.controlmat.entity.MaterialInsumo;
 import com.lab.controlmat.entity.Persona;
+import com.lab.controlmat.entity.RegistroConsumo;
 import com.lab.controlmat.exception.NoExistException;
 
 public interface RegistroConsumoService {
 
-	 List<RegistroConsumoDTO> findAll();
+	 List<RegistroConsumo> findAll();
 	
 	 String saveAndUpdate(RegistroConsumoDTO registroConsumoDTO)  throws JsonProcessingException, NoExistException;
 	
-	 String delete(RegistroConsumoDTO registroConsumoDTO)  throws JsonProcessingException;
+	 String delete(RegistroConsumoDTO registroConsumoDTO)  throws JsonProcessingException, NoExistException;
 
-	 
-	
 }

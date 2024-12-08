@@ -10,6 +10,7 @@ import com.lab.controlmat.dto.ProductoDTO;
 import com.lab.controlmat.dto.UsuarioRolDTO;
 import com.lab.controlmat.entity.MaterialInsumo;
 import com.lab.controlmat.entity.Persona;
+import com.lab.controlmat.entity.UsuarioRol;
 import com.lab.controlmat.exception.NoExistException;
 
 public interface UsuarioRolService {
@@ -20,5 +21,5 @@ public interface UsuarioRolService {
 	
 	 String delete(UsuarioRolDTO usuarioRolDTO)  throws JsonProcessingException;
 
-	 public void findById(int idUsuarioRolDTO) throws NoExistException;
+	 UsuarioRol findById(int idUsuarioRolDTO) throws NoExistException;
 }
