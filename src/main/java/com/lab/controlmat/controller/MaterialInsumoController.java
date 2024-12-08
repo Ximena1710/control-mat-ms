@@ -19,7 +19,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lab.controlmat.dto.MaterialInsumoDTO;
 import com.lab.controlmat.service.MaterialInsulmoService;
 
-@CrossOrigin(origins = "https://controlmat-ms.onrender.com", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/v1/material")
 @RestController
 public class MaterialInsumoController {

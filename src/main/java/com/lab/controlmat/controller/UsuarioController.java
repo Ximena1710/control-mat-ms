@@ -15,7 +15,7 @@ import com.lab.controlmat.dto.Credenciales;
 import com.lab.controlmat.dto.PersonasDTO;
 import com.lab.controlmat.service.UsuarioService;
 
-@CrossOrigin(origins = "https://controlmat-ms.onrender.com", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/v1/usuario")
 @RestController
 public class UsuarioController {

@@ -21,7 +21,7 @@ import com.lab.controlmat.dto.ProductoDTO;
 import com.lab.controlmat.service.MaterialInsulmoService;
 import com.lab.controlmat.service.ProductoService;
 
-@CrossOrigin(origins = "https://controlmat-ms.onrender.com", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/v1/producto")
 public class ProductoController {

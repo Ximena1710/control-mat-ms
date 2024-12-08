@@ -26,7 +26,7 @@ import com.lab.controlmat.service.RegistroConsumoService;
 import org.springframework.validation.annotation.Validated;
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "https://controlmat-ms.onrender.com", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/v1/consumo")
 @Validated

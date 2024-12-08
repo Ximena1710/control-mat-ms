@@ -21,7 +21,7 @@ import com.lab.controlmat.dto.UsuarioRolDTO;
 import com.lab.controlmat.service.MaterialInsulmoService;
 import com.lab.controlmat.service.UsuarioRolService;
 
-@CrossOrigin(origins = "https://controlmat-ms.onrender.com", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/v1/usuariorol")
 @RestController
 public class UsuarioRolController {
