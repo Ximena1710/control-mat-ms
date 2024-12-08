@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import com.lab.controlmat.dto.UsuarioRolDTO;
 import com.lab.controlmat.service.MaterialInsulmoService;
 import com.lab.controlmat.service.UsuarioRolService;
 
+@CrossOrigin(origins = "https://controlmat-ms.onrender.com", allowedHeaders = "*")
 @RequestMapping("/v1/usuariorol")
 @RestController
 public class UsuarioRolController {
