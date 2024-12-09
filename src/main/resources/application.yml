@@ -13,3 +13,12 @@ spring:
         ddl-auto: none
         show-sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CorsFilter: DEBUG
+          cors: DEBUG

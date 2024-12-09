@@ -11,7 +11,7 @@ public class Config implements WebMvcConfigurer {
 	public void addCorsMappings(CorsRegistry registry) {
 	    registry.addMapping("/**")
 	            .allowedOrigins(
-	                "https://ximena1710.github.io", // Dominio del frontend
+	                "https://ximena1710.github.io",
 	                "http://localhost:4200", 
 	                "http://localhost:3000", 
 	                "https://controlmat-ms.onrender.com"
