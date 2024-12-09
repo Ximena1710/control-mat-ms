@@ -12,12 +12,13 @@ public class CorsGlobalConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.addAllowedOrigin("https://controlmat-ms.onrender.com");
-        corsConfig.addAllowedOrigin("http://localhost:4200");
-        corsConfig.addAllowedOrigin("http://localhost:3000");
-        corsConfig.addAllowedMethod("*");
-        corsConfig.addAllowedHeader("*");
-        corsConfig.setAllowCredentials(true);
+        corsConfig.addAllowedOrigin("https://ximena1710.github.io"); // Añade el dominio del frontend en GitHub
+        corsConfig.addAllowedOrigin("https://controlmat-ms.onrender.com"); // Producción del backend
+        corsConfig.addAllowedOrigin("http://localhost:4200"); // Desarrollo en Angular
+        corsConfig.addAllowedOrigin("http://localhost:3000"); // Desarrollo en React
+        corsConfig.addAllowedMethod("*"); // Permitir todos los métodos HTTP
+        corsConfig.addAllowedHeader("*"); // Permitir todos los encabezados
+        corsConfig.setAllowCredentials(true); // Permitir cookies/credenciales
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);
